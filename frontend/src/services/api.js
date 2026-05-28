@@ -9,17 +9,22 @@ const isNative = () => {
   }
 }
 
-// Android emulator uses 10.0.2.2 to reach host machine's localhost
+// Production backend URL
+const PROD_API = 'https://mysql-production-dba3.up.railway.app'
+
 const getBaseUrl = () => {
   if (isNative()) {
-    // Check if Android or iOS
     const platform = window.Capacitor.getPlatform()
     if (platform === 'android') {
       return 'http://10.0.2.2:7070'
     }
-    // iOS simulator can use localhost directly
     return 'http://localhost:7070'
   }
+  // In production (Vercel), use the Railway backend
+  if (window.location.hostname !== 'localhost') {
+    return PROD_API
+  }
+  // Local development - use Vite proxy
   return ''
 }
 
