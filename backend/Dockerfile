@@ -8,5 +8,7 @@ RUN mvn clean package -DskipTests -B
 FROM eclipse-temurin:21-jre
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
+ENV PORT=7070
+ENV SPRING_PROFILES_ACTIVE=prod
 EXPOSE 7070
-ENTRYPOINT ["sh", "-c", "java -Dserver.port=${PORT:-7070} -jar app.jar"]
+ENTRYPOINT ["sh", "-c", "java -Dserver.port=${PORT} -Dspring.profiles.active=${SPRING_PROFILES_ACTIVE} -jar app.jar"]
