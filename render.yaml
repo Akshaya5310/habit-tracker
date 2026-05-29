@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: habit-tracker-api
+    runtime: docker
+    rootDir: ./backend
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: dev
+      - key: PORT
+        value: "7070"
+      - key: JWT_SECRET
+        value: habit-tracker-prod-secret-key-that-is-at-least-256-bits-long-for-hs256-algorithm
+      - key: CORS_ORIGINS
+        value: https://frontend-eta-eight-15.vercel.app,http://localhost:5173

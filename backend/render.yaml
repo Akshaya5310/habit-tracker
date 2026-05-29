@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: habit-tracker-api
+    runtime: docker
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: dev
+      - key: PORT
+        value: "7070"
