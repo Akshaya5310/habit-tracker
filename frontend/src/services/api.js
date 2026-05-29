@@ -10,7 +10,7 @@ const isNative = () => {
 }
 
 // Production backend URL
-const PROD_API = 'https://mysql-production-dba3.up.railway.app'
+const PROD_API = 'https://habit-tracker-api-uiyk.onrender.com'
 
 const getBaseUrl = () => {
   if (isNative()) {
