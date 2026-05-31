@@ -8,5 +8,7 @@ RUN mvn clean package -DskipTests -B
 FROM eclipse-temurin:21-jre
 WORKDIR /app
 COPY --from=build /app/target/*.jar app.jar
+# Unset any SPRING_PROFILES_ACTIVE so default (MySQL) config is used
+ENV SPRING_PROFILES_ACTIVE=""
 EXPOSE 7070
-ENTRYPOINT ["sh", "-c", "java -Dspring.profiles.active=prod -Dserver.port=${PORT:-7070} -jar app.jar"]
+ENTRYPOINT ["sh", "-c", "java -Dspring.profiles.active=${SPRING_PROFILES_ACTIVE:-default} -Dserver.port=${PORT:-7070} -jar app.jar"]
